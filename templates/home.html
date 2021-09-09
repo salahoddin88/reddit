@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if messages %}
+	<ul class="messages">
+		{% for message in messages %}
+		<li{% if message.tags %} class="text-{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+	</ul>
+{% endif %}
 <section class="slider">
 	<div class="container">
 		<div class="row">
@@ -54,11 +61,8 @@
 						<div class="post-content">
 							<a href="{% url 'QuestionDetails' question_id=question.id %}" class="btn btn-main">Continue Reading</a>
 						</div>
-
 					</div>
 				{% endfor %}
-				
-				
 			</div>
 		</div>
 	</div>

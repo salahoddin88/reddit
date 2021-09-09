@@ -53,6 +53,25 @@
                                                     <p>
                                                         {{answerdict.answer}}
                                                     </p>
+                                                    
+                                                    <div class="col-md-12">
+                                                        {% if answerdict.comments %}
+                                                            {% for comment in answerdict.comments %}
+                                                                <div class="row">
+                                                                    <div class="col-md-4">{{comment.user.first_name|title}} {{comment.user.last_name|title}}
+                                                                        <small>{{comment.added_date}}</small>
+                                                                    </div>
+                                                                    <div class="col-md-6">{{comment.comments}}</div>
+                                                                    {% if comment.image %}
+                                                                        <div class="col-md-2"><a target="_blank" href="{{comment.image.url}}"><img width=50 src="{{comment.image.url}}"></a></div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                            
+                                                    </div>
+                                                    
+                                                    
                                                     {% if request.user.is_authenticated %}
                                                         <form action="{% url 'SaveComment' %}" method="POST" enctype='multipart/form-data'>
                                                             {% csrf_token %}
